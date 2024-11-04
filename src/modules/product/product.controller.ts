@@ -13,7 +13,7 @@ export class ProductController {
   }
 
   @Get(':id')
-  public async getProduct(@Param('id') productId: number): Promise<Product> {
+  public async getProduct(@Param('id') productId: string): Promise<Product> {
     return await this.productService.getProductById(productId);
   }
 

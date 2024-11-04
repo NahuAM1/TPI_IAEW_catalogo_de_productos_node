@@ -19,7 +19,7 @@ export class ProductService {
     return productsData;
   }
 
-  public async getProductById(productId: number): Promise<Product> {
+  public async getProductById(productId: string): Promise<Product> {
     const productData: Product = await this.productRepository.findOne({
       where: { id: productId },
     });
@@ -32,6 +32,13 @@ export class ProductService {
   public async createProduct(
     createProductDTO: CreateProductDTO,
   ): Promise<Product> {
-    return await this.productRepository.save(createProductDTO);
+    return await this.productRepository.save({
+      name: createProductDTO.nombre,
+      description: createProductDTO.descripcion,
+      price: createProductDTO.precio,
+      stock: createProductDTO.stock,
+      availability: createProductDTO.disponibilidad,
+      category: createProductDTO.categoria,
+    });
   }
 }
