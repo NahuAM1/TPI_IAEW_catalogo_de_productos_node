@@ -9,6 +9,7 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
+import { EventPattern, Payload } from '@nestjs/microservices';
 
 @ApiTags('Products')
 @Controller('productos')
@@ -58,5 +59,10 @@ export class ProductController {
     @Body() createProductDTO: CreateProductDTO,
   ): Promise<Product> {
     return await this.productService.createProduct(createProductDTO);
+  }
+
+  @EventPattern('pedidos.creados')
+  public async handleOrderCreated(@Payload() data: any) {
+    await this.productService.handleOrderCreated(data);
   }
 }
