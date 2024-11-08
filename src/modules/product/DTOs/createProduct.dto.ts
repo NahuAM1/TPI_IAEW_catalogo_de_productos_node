@@ -7,7 +7,7 @@ import {
   IsString,
 } from '@nestjs/class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { AVAILABILITY } from 'src/commons/constants/enums';
+import { AVAILABILITY } from '../../../commons/constants/enums';
 
 export class CreateProductDTO {
   @ApiProperty({
