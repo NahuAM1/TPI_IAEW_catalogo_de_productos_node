@@ -15,7 +15,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         transport: Transport.RMQ,
         options: {
           //  URL de tu servidor RabbitMQ
-          urls: ['amqp://localhost:5672'], 
+          urls: ['amqps://pfrmyfie:nQJY633UWr9eNukGMAQut_DOrNGhdhAq@prawn.rmq.cloudamqp.com/pfrmyfie'], 
           // Nombre de la cola
           queue: 'productos',              
           queueOptions: {
