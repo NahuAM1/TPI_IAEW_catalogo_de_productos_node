@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { Product } from 'src/entities/product';
 import { CreateProductDTO } from './DTOs/createProduct.dto';
@@ -20,7 +20,7 @@ export class ProductController {
   })
   @ApiResponse({
     status: 200,
-    description: 'All products avaliable.',
+    description: 'All products available.',
   })
   @Get()
   public async getProducts(): Promise<Product[]> {
@@ -32,10 +32,11 @@ export class ProductController {
   })
   @ApiResponse({
     status: 200,
-    description: 'All products avaliable.',
+    description: 'Product details.',
   })
   @ApiParam({
-    name: 'The product id.',
+    name: 'id',
+    description: 'The product id.',
   })
   @Get(':id')
   public async getProduct(@Param('id') productId: string): Promise<Product> {
@@ -58,5 +59,32 @@ export class ProductController {
     @Body() createProductDTO: CreateProductDTO,
   ): Promise<Product> {
     return await this.productService.createProduct(createProductDTO);
+  }
+
+  @ApiOperation({
+    summary: 'This endpoint allows to update a Product with ID.',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Product has been updated.',
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Product not found.',
+  })
+  @ApiBody({
+    description: 'The DTO of the Product Data to update.',
+    type: CreateProductDTO,
+  })
+  @ApiParam({
+    name: 'id',
+    description: 'The product id.',
+  })
+  @Put(':id')
+  public async updateProduct(
+    @Param('id') productId: string,
+    @Body() updateProductDTO: CreateProductDTO,
+  ): Promise<Product> {
+    return await this.productService.updateProduct(productId, updateProductDTO);
   }
 }
