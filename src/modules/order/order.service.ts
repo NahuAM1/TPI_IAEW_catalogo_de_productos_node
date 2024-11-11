@@ -17,7 +17,7 @@ export class OrderService {
         // If there is enough stock, mark as reserved and update the product
         const updatedProduct = await this.productService.updateProduct(product.id, {
           disponibilidad: 'reservado', 
-          //stock: product.stock - item.cantidad, // Reduce stock by the quantity
+          //stock: product.stock - item.cantidad, // Reduce stock by the quantity (en el enunciado dice que no hay que reducir stock)
         });
 
         productsToReserve.push({
