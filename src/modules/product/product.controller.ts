@@ -35,7 +35,8 @@ export class ProductController {
     description: 'All products avaliable.',
   })
   @ApiParam({
-    name: 'The product id.',
+    name: 'id',
+    description: 'The product id.',
   })
   @Get(':id')
   public async getProduct(@Param('id') productId: string): Promise<Product> {
