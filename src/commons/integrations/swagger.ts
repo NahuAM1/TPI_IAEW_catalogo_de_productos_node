@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { join } from 'path';
 
 @Injectable()
 export class SwaggerManager {
@@ -12,11 +11,8 @@ export class SwaggerManager {
       .setVersion('1.0')
       .build();
     const document = SwaggerModule.createDocument(app, config);
-    SwaggerModule.setup('apidocumentation', app, document, {
+    SwaggerModule.setup('ApiDocumentation', app, document, {
       swaggerOptions: { tagsSorter: 'alpha', operationsSorter: 'alpha' },
-    });
-    app.useStaticAssets(join(__dirname, '/static'), {
-      prefix: '/swagger',
     });
   }
 }
