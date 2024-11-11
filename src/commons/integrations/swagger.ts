@@ -11,7 +11,7 @@ export class SwaggerManager {
       .setVersion('1.0')
       .build();
     const document = SwaggerModule.createDocument(app, config);
-    SwaggerModule.setup('ApiDocumentation', app, document, {
+    SwaggerModule.setup('apidocumentation', app, document, {
       swaggerOptions: { tagsSorter: 'alpha', operationsSorter: 'alpha' },
     });
   }
