@@ -2,24 +2,24 @@
     "version": 2,
     "builds": [
         {
-            "src": "src/main.ts",
+            "src": "dist/commons/integrations/swagger.js",
             "use": "@vercel/node"
         }
     ],
     "routes": [
         {
-            "src": "/apidocumentation",
-            "dest": "src/main.ts"
-        },
-        {
             "src": "/(.*)",
-            "dest": "src/main.ts",
+            "dest": "dist/commons/integrations/swagger.js",
             "methods": [
                 "GET",
                 "POST",
                 "PUT",
                 "DELETE"
             ]
+        },
+        {
+            "src": "/apidocumentation",
+            "dest": "/dist/commons/integrations/swagger.js"
         }
     ]
 }
