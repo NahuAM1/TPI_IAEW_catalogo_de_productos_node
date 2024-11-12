@@ -1,5 +1,6 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { Product } from '../../entities/product';
+//configuracion del ORM
 export const ORM_CONFIG: TypeOrmModuleOptions = {
   type: 'mysql',
   host: 'sql10.freesqldatabase.com',
