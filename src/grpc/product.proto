@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package productos;
+
+service ProductService {
+  rpc CheckProductAvailability (ProductAvailabilityRequest) returns (ProductAvailabilityResponse);
+}
+
+message ProductAvailabilityRequest {
+  string productoId = 1;
+  int32 cantidad = 2;
+}
+
+message ProductAvailabilityResponse {
+  string productoId = 1;
+  bool disponible = 2;
+  double precio = 3;
+  int32 stockActual = 4;
+}
