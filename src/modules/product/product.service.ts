@@ -4,6 +4,8 @@ import { Product } from '../../entities/product';
 import { Repository } from 'typeorm';
 import { CreateProductDTO } from './DTOs/createProduct.dto';
 import { ClientProxy } from '@nestjs/microservices';
+import { ProductAvailabilityRequest, ProductAvailabilityResponse } from 'src/grpc/product';
+import { RpcException } from '@nestjs/microservices'; 
 
 @Injectable()
 export class ProductService {
@@ -74,13 +76,45 @@ export class ProductService {
   
     return updatedProduct;
   }
+
+  async checkProductAvailability(
+    data: ProductAvailabilityRequest,
+  ): Promise<ProductAvailabilityResponse> {
+    const { productoId, cantidad } = data;
+  
+    // Validar que productoId y cantidad estén presentes
+    if (!productoId || cantidad == null) {
+      throw new RpcException({
+        code: 3,
+        message: 'ID de producto o cantidad no especificados.',
+      });
+    }
+  
+    // Buscar el producto por su ID
+    const product = await this.productRepository.findOneBy({ id: productoId });
+  
+    // Si el producto no existe, lanza una NotFoundException convertida a RpcException
+    if (!product) {
+      throw new RpcException({
+        code: 5, 
+        message: 'Producto no existente.',
+      });
+    }
+  
+    // Verificar disponibilidad según el stock actual
+    const disponible = product.stock >= cantidad;
+  
+    // Devolver los datos de disponibilidad y estado actual del producto
+    return {
+      productoId: product.id,
+      disponible,
+      precio: product.price,
+      stockActual: product.stock,
+    };
+  }
   
 
 
-
-
-
-  
 }
 
 

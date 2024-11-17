@@ -9,6 +9,9 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
+import { EventPattern, Payload } from '@nestjs/microservices';
+import { ProductAvailabilityRequest, ProductAvailabilityResponse } from 'src/grpc/product';
+import { GrpcMethod } from '@nestjs/microservices';
 
 @ApiTags('Products')
 @Controller('productos')
@@ -87,4 +90,10 @@ export class ProductController {
   ): Promise<Product> {
     return await this.productService.updateProduct(productId, updateProductDTO);
   }
+
+  @GrpcMethod('ProductService', 'CheckProductAvailability')
+  async checkProductAvailability(data: ProductAvailabilityRequest,): Promise<ProductAvailabilityResponse> {
+    return this.productService.checkProductAvailability(data);
+  }
+
 }

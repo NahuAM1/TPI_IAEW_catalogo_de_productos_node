@@ -20,6 +20,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@grpc/grpc-js": "^1.12.2",
+    "@grpc/proto-loader": "^0.7.13",
     "@nestjs/class-transformer": "^0.4.0",
     "@nestjs/class-validator": "^0.13.4",
     "@nestjs/common": "^10.0.0",
@@ -37,6 +39,7 @@
     "rxjs": "^7.8.1",
     "swagger-ui-express": "^5.0.1",
     "tpi_iaew_catalogo_de_productos_node": "file:",
+    "ts-proto": "^2.2.7",
     "typeorm": "^0.3.20"
   },
   "devDependencies": {
