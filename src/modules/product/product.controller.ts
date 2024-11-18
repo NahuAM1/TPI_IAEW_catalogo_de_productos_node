@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { Product } from '../../entities/product';
 import { CreateProductDTO } from './DTOs/createProduct.dto';
@@ -12,9 +12,11 @@ import {
 import { EventPattern, Payload } from '@nestjs/microservices';
 import { ProductAvailabilityRequest, ProductAvailabilityResponse } from 'src/grpc/product';
 import { GrpcMethod } from '@nestjs/microservices';
+import { AuthGuard } from '@nestjs/passport';
 
 @ApiTags('Products')
 @Controller('productos')
+@UseGuards(AuthGuard())
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
 

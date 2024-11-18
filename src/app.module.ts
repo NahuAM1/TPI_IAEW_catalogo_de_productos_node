@@ -3,6 +3,7 @@ import { ProductModule } from './modules/product/product.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ORM_CONFIG } from './commons/constants/mysql-config';
 import { ClientsModule, Transport } from '@nestjs/microservices';
+import { AuthModule } from './commons/integrations/Auth/auth.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot(ORM_CONFIG), 
@@ -20,6 +21,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         },
       },
     ]),
+    AuthModule,
   ],
   controllers: [],
   providers: [],
