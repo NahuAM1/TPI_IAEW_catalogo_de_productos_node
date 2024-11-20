@@ -1,14 +1,14 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import 'dotenv/config';
-
+import { Product } from '../../entities/product';
+//configuracion del ORM
 export const ORM_CONFIG: TypeOrmModuleOptions = {
-  type: 'mariadb',
-  host: process.env.DB_RDS_HOST ?? '',
-  port: Number(process.env.DB_RDS_PORT || 3306),
-  username: process.env.DB_RDS_USER ?? '',
-  password: process.env.DB_RDS_PASSWORD ?? '',
-  database: process.env.DB_RDS_DATABASE ?? '',
-  entities: ['dist/entities/**/*{.ts,.js}'],
+  type: 'mysql',
+  host: 'sql10.freesqldatabase.com',
+  port: 3306,
+  username: 'sql10745351',
+  password: 'lFcIpEB7A7',
+  database: 'sql10745351',
+  entities: [Product],
   charset: 'utf8mb4_unicode_ci',
   synchronize: false,
 };
