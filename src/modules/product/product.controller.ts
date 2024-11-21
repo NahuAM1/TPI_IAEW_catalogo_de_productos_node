@@ -91,6 +91,18 @@ export class ProductController {
     return await this.productService.updateProduct(productId, updateProductDTO);
   }
 
+  @ApiOperation({
+    summary: 'Check product availability via gRPC.',
+    description:
+      'This gRPC method checks the availability of a product. It receives a `ProductAvailabilityRequest` and returns a `ProductAvailabilityResponse`.',
+  })
+  @ApiBody({
+    description: 'The gRPC request payload.',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'The gRPC response containing availability details.',
+  })
   @GrpcMethod('ProductService', 'CheckProductAvailability')
   async checkProductAvailability(data: ProductAvailabilityRequest,): Promise<ProductAvailabilityResponse> {
     return this.productService.checkProductAvailability(data);
